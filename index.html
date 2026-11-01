@@ -106,12 +106,15 @@ body{
 }
 .bar i{
   display:block;width:100%;border-radius:2px 2px 0 0;
-  background:var(--stack,#cfd4cc);position:relative;overflow:hidden;
+  background:var(--stack,#cfd4cc);
+  background:color-mix(in srgb, var(--stack,#cfd4cc) 28%, var(--paper));
+  position:relative;overflow:hidden;
   transition:filter .15s;
 }
 .bar i::after{
   content:"";position:absolute;left:0;right:0;bottom:0;
-  height:var(--fill,0%);background:var(--ink);opacity:.85;
+  height:var(--fill,0%);background:var(--stack,#cfd4cc);
+  background:color-mix(in srgb, var(--stack,#cfd4cc) 72%, #000);
 }
 .bar em{
   font-style:normal;display:block;font-size:.62rem;color:var(--soft);
@@ -120,7 +123,7 @@ body{
 .bar[aria-pressed="true"] i{outline:2px solid var(--ink);outline-offset:1px}
 .bar[aria-pressed="true"] em{color:var(--ink);font-variation-settings:"wght" 700}
 .bar:hover i{filter:brightness(.92)}
-.bar.race i{background:var(--red)}
+.bar.full em{color:var(--teal);font-variation-settings:"wght" 700}
 .legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:.75rem;color:var(--soft)}
 .legend s{display:inline-block;width:10px;height:10px;border-radius:2px;text-decoration:none;margin-right:5px;vertical-align:-1px}
 
@@ -278,7 +281,7 @@ footer .ver{display:inline-block;margin-top:6px;font-size:.72rem;opacity:.75;fon
 <header class="hero">
   <p class="race">Mitja Marató de Barcelona, domingo 14 de febrero de 2027</p>
   <h1 class="clock" id="clock">1:40:00
-    <small>Ritmo objetivo 4:44 min/km, FC de carrera 172–178. Marca actual 1:44 (2025), 1:53 en 2024. Mejor 10K 44:52.</small>
+    <small>Ritmo objetivo 4:44 min/km, FC de carrera por calibrar con el 10K de control. Marca actual 1:44 (2025), 1:53 en 2024. Mejor 10K 44:52.</small>
   </h1>
   <div class="stats">
     <div class="stat"><b id="stDays">—</b><span>días para la carrera</span></div>
@@ -298,7 +301,7 @@ footer .ver{display:inline-block;margin-top:6px;font-size:.72rem;opacity:.75;fon
     <span><s style="background:var(--teal)"></s>Ritmo de media</span>
     <span><s style="background:var(--ink)"></s>Afinado</span>
     <span><s style="background:var(--red)"></s>Carrera</span>
-    <span>La altura es el volumen semanal. El relleno oscuro, lo que ya has hecho.</span>
+    <span>La altura es el volumen semanal. Color intenso, lo hecho; claro, lo que falta. ✓, semana completa.</span>
   </div>
 </section>
 
@@ -533,7 +536,7 @@ footer .ver{display:inline-block;margin-top:6px;font-size:.72rem;opacity:.75;fon
   </div>
 </section>
 
-<footer>Plan de 18 semanas. Martes, jueves y sábado, con la fuerza de piernas pegada al martes. Del 12 de octubre de 2026 al 14 de febrero de 2027.<br><span class="ver">v3.4 · 1 de noviembre de 2026 · zonas de pulso recalibradas · datos de Garmin</span></footer>
+<footer>Plan de 18 semanas. Martes, jueves y sábado, con la fuerza de piernas pegada al martes. Del 12 de octubre de 2026 al 14 de febrero de 2027.<br><span class="ver">v3.6 · 1 de noviembre de 2026 · zonas de pulso recalibradas · datos de Garmin</span></footer>
 </div>
 
 <script>
@@ -558,7 +561,7 @@ const PLAN = [
   {d:"Martes",t:"calidad",ti:"Fartlek de estreno",de:"2 km suaves, 6 × 1 min fuerte con 2 min suaves, 2 km suaves. Sin cronómetro estricto, por sensación.",rp:"5:25",fc:null,km:8},
   {d:"Martes, tras correr",t:"fuerza",ti:"Fuerza: bloques 1, 3 y 5",de:"Unos 16 min justo después de la calidad. Los bloques 2 y 4 (empuje, tirón y core) el viernes, el domingo o tras el golf: no cargan las piernas, da igual el día.",rp:null,fc:null,km:0},
   {d:"Jueves",t:"suave",ti:"Rodaje con rectas",de:"7 km a 5:30–5:45 más 6 rectas de 20 s en progresión, con recuperación andando.",rp:"5:35",fc:"128–138",km:7},
-  {d:"Sábado",t:"largo",ti:"Tirada larga",de:"10 km continuos a 5:25–5:40. Si la FC se va de 155, afloja aunque el ritmo baje.",rp:"5:32",fc:"132–142",km:10}
+  {d:"Sábado",t:"largo",ti:"Tirada larga",de:"10 km continuos a 5:25–5:40. Si la FC pasa de 142, afloja aunque el ritmo baje.",rp:"5:32",fc:"132–142",km:10}
  ]},
 {n:2,start:"2026-10-19",dates:"19–25 octubre",phase:"base",
  focus:"Entran las cuestas: construyen fuerza sin castigar las articulaciones y te sirven de los 150 m de desnivel que ya haces en casa.",
@@ -587,7 +590,7 @@ const PLAN = [
 {n:5,start:"2026-11-09",dates:"9–15 noviembre",phase:"fuerza",
  focus:"Primer trabajo de umbral. Es el estímulo que más va a mover tu marca en una media, y el que en 2025 no hiciste nunca.",
  s:[
-  {d:"Martes",t:"calidad",ti:"Umbral 2 × 10 min",de:"2 km suaves, 2 × 10 min a 4:35 con 3 min de trote, 2 km suaves. En los bloques debes ver 178–185.",rp:"5:08",fc:null,km:10},
+  {d:"Martes",t:"calidad",ti:"Umbral 2 × 10 min",de:"2 km suaves, 2 × 10 min a 4:35 con 3 min de trote, 2 km suaves. Fíjate en el pulso de los bloques: servirá para calibrar tu zona de umbral.",rp:"5:08",fc:null,km:10},
   {d:"Martes, tras correr",t:"fuerza",ti:"Fuerza: bloques 1, 3 y 5",de:"Unos 16 min justo después de la calidad. Los bloques 2 y 4 (empuje, tirón y core) el viernes, el domingo o tras el golf: no cargan las piernas, da igual el día.",rp:null,fc:null,km:0},
   {d:"Jueves",t:"suave",ti:"Rodaje",de:"9 km a 5:30–5:45.",rp:"5:37",fc:"128–138",km:9},
   {d:"Sábado",t:"largo",ti:"Largo con progresión",de:"15 km, los 3 últimos a 4:50.",rp:"5:20",fc:null,km:15}
@@ -641,7 +644,7 @@ const PLAN = [
   {d:"Flexible",t:"largo",ti:"Tirada larga",de:"14 km a 5:20–5:35.",rp:"5:28",fc:"132–142",km:14}
  ]},
 {n:12,start:"2026-12-28",dates:"28 diciembre – 3 enero",phase:"espec",
- focus:"Aparece el ritmo objetivo en bloques. Memoriza la sensación de 4:44 y la pulsación que lo acompaña: debe parecerte cómodamente incómodo, con la FC entre 172 y 178.",
+ focus:"Aparece el ritmo objetivo en bloques. Memoriza la sensación de 4:44 y la pulsación que lo acompaña: debe parecerte cómodamente incómodo. Ese pulso será tu referencia de carrera.",
  s:[
   {d:"Flexible",t:"calidad",ti:"3 × 10 min a ritmo de media",de:"2 km suaves, 3 × 10 min a 4:44 con 2 min de trote, 2 km suaves.",rp:"5:10",fc:null,km:10},
   {d:"Flexible",t:"fuerza",ti:"Fuerza y movilidad",de:"Una sesión de 25 min.",rp:null,fc:null,km:0},
@@ -678,7 +681,7 @@ const PLAN = [
   {d:"Martes",t:"calidad",ti:"2 × 4 km a ritmo de media",de:"2 km suaves, 2 × 4 km a 4:44 con 3 min de trote, 1 km suave.",rp:"5:05",fc:null,km:11},
   {d:"Martes, tras correr",t:"fuerza",ti:"Fuerza: bloques 1 y 3",de:"Sin bloque 5: nada de saltos a partir de aquí. Bloques 2 y 4, cuando puedas.",rp:null,fc:null,km:0},
   {d:"Jueves",t:"suave",ti:"Rodaje",de:"10 km a 5:30–5:45.",rp:"5:37",fc:"128–138",km:10},
-  {d:"Sábado",t:"largo",ti:"Largo específico",de:"20 km: 5 km suaves, 12 km a 4:44, 3 km suaves. Ensaya geles, ropa y zapatillas de carrera. En el bloque central quiero ver 172–178.",rp:"5:05",fc:null,km:20}
+  {d:"Sábado",t:"largo",ti:"Largo específico",de:"20 km: 5 km suaves, 12 km a 4:44, 3 km suaves. Ensaya geles, ropa y zapatillas de carrera. El pulso del bloque central confirmará tu zona de carrera.",rp:"5:05",fc:null,km:20}
  ]},
 {n:17,start:"2027-02-01",dates:"1–7 febrero",phase:"afinado",
  focus:"Afinado. Baja el volumen, mantén la intensidad. Vas a sentirte raro y con energía sobrante: es lo esperado.",
@@ -689,7 +692,7 @@ const PLAN = [
   {d:"Sábado",t:"largo",ti:"Largo corto con ritmo",de:"13 km con 5 km a 4:44 en el medio.",rp:"5:12",fc:null,km:13}
  ]},
 {n:18,start:"2027-02-08",dates:"8–14 febrero",phase:"carrera",
- focus:"Semana de carrera, y aquí los días cambian: la activación va el miércoles y el rodaje corto el viernes, para llegar al domingo con dos días de piernas frescas. Nada nuevo: ni zapatillas, ni geles, ni comidas. El plan: 4:48 los primeros 5 km, 4:44 hasta el 15 y desde ahí lo que quede. Si pasas el km 10 por debajo de 170 pulsaciones, vas sobrado y toca apretar.",
+ focus:"Semana de carrera, y aquí los días cambian: la activación va el miércoles y el rodaje corto el viernes, para llegar al domingo con dos días de piernas frescas. Nada nuevo: ni zapatillas, ni geles, ni comidas. El plan: 4:48 los primeros 5 km, 4:44 hasta el 15 y desde ahí lo que quede. Si pasas el km 10 con el pulso por debajo del que tuviste en el largo específico, vas sobrado y toca apretar.",
  s:[
   {d:"Miércoles 10",t:"calidad",ti:"Activación",de:"7 km con 5 × 1 min a 4:35 dentro del rodaje.",rp:"5:25",fc:null,km:7},
   {d:"Viernes 12",t:"suave",ti:"Rodaje de descarga",de:"5 km muy suaves más 4 rectas.",rp:"5:45",fc:"125–135",km:5},
@@ -950,11 +953,12 @@ function renderStrip(){
     const km = weekKm(w);
     const done = w.s.filter((s,i)=>get(w.n,i).done).length;
     const b = document.createElement("button");
-    b.className = "bar" + (w.phase==="carrera" ? " race" : "");
+    const full = done===w.s.length;
+    b.className = "bar" + (w.phase==="carrera" ? " race" : "") + (full ? " full" : "");
     b.setAttribute("aria-pressed", idx===current);
-    b.setAttribute("aria-label", "Semana "+w.n+", "+w.dates+", "+km+" kilómetros");
+    b.setAttribute("aria-label", "Semana "+w.n+", "+w.dates+", "+km+" kilómetros, "+(full ? "completa" : done+" de "+w.s.length+" sesiones hechas"));
     b.style.setProperty("--stack", PHASES[w.phase].color);
-    b.innerHTML = '<i style="height:'+Math.round(km/max*76)+'px;--fill:'+Math.round(done/w.s.length*100)+'%"></i><em>'+w.n+'</em>';
+    b.innerHTML = '<i style="height:'+Math.round(km/max*76)+'px;--fill:'+Math.round(done/w.s.length*100)+'%"></i><em>'+(full ? "✓" : w.n)+'</em>';
     b.onclick = ()=>{ current = idx; render(); const t = document.getElementById("week"); if(t && t.scrollIntoView) t.scrollIntoView({behavior:"smooth",block:"start"}); };
     strip.appendChild(b);
   });
